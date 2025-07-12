@@ -3,7 +3,7 @@
 
 ### Purpose & Scope
 
-This document serves as the **master navigation hub** for comprehensive ALP (Australian Legal Portal) business application documentation. The ALP system is a sophisticated legal practice management platform built on .NET Core with Vue.js frontend, PostgreSQL database, and integrated business intelligence via Metabase.
+This document serves as the **master navigation hub** for comprehensive ALP business application documentation. The ALP system is a sophisticated legal practice management platform built on .NET Core with Vue.js frontend, PostgreSQL database, and integrated business intelligence via Metabase.
 
 **Documentation Structure**: Each business module has been separated into focused documentation files for detailed analysis and development. This overview provides system-wide context and navigation to specific modules.
 
