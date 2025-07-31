@@ -1,0 +1,6 @@
+ALP-reference/
+metabase-mcp/
+
+# Sensitive configuration files
+~/.cursor/mcp.json
+**/mcp.json
