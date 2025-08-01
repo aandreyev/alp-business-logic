@@ -208,7 +208,8 @@ SELECT
     u.id,
     u.first_name || ' ' || u.last_name as user_name,
     u.is_legal,
-    o.legal_entity as office_name,
+    COALESCE(o.abbreviation, 'No Office') as office_name,
+    COALESCE(be.legal_entity_name, 'No Entity') as business_entity,
     -- Matter time
     COALESCE(SUM(mte.units), 0) as matter_time_units,
     COALESCE(SUM(mte.units * mte.rate / 10.0), 0) as matter_time_value,
@@ -224,11 +225,12 @@ SELECT
     COALESCE(SUM(mte.units * mte.rate / 10.0), 0) + COALESCE(SUM(pte.units * pte.rate / 10.0), 0) + COALESCE(SUM(ste.units * ste.rate / 10.0), 0) as total_time_value
 FROM users u
 LEFT JOIN offices o ON u.office_id = o.id
+LEFT JOIN business_entities be ON o.business_entity_id = be.id
 LEFT JOIN matter_component_time_entries mte ON u.id = mte.user_id
 LEFT JOIN project_task_time_entries pte ON u.id = pte.user_id  
 LEFT JOIN sales_time_entries ste ON u.id = ste.user_id
 WHERE u.is_deleted = FALSE
-GROUP BY u.id, o.id;
+GROUP BY u.id, u.first_name, u.last_name, u.is_legal, o.abbreviation, be.legal_entity_name;
 ```
 
 ## Important Table Relationships

@@ -24,7 +24,7 @@ From our documented framework, we've identified several areas of complexity that
 - **Matter Status Workflows**: Complex state transitions with business rule dependencies
 - **Time Entry Inheritance**: Table-per-hierarchy patterns with multiple discriminator types
 - **Trust Accounting Compliance**: Regulatory requirements with cross-entity validation rules
-- **Multi-tenant Architecture**: Tenant-based data separation across all entities
+- **Business Entity Structure**: Single-firm application with multiple legal entities and office relationships
 
 ---
 

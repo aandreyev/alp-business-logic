@@ -1,4 +1,5 @@
 ALP-reference/
+.obsidian/
 
 # Sensitive configuration files
 ~/.cursor/mcp.json

@@ -127,7 +127,9 @@ Template Application:
 ## ⚠️ Critical Business Logic Insights
 
 ### Database Architecture
-- **Multi-tenant**: All tables include tenant-based data separation
+- **Single-Firm Structure**: Application serves one firm with multiple business entities and offices
+- **Business Entity Support**: Legal entities managed through `business_entities` table
+- **Office Management**: Physical locations tracked in `offices` table (linked to business entities)
 - **Soft Deletes**: Use `WHERE is_deleted = false` in all queries
 - **Inheritance Pattern**: Time entries use table-per-hierarchy with `discriminator` field
 - **Naming Convention**: snake_case throughout (e.g., `client_id`, `updated_at`)

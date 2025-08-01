@@ -19,8 +19,10 @@ This document serves as the **master navigation hub** for comprehensive ALP busi
 - **Analytics**: Metabase embedded for business intelligence
 - **Integration**: Microsoft Graph, SharePoint, Xero, Active Campaign
 
-### Multi-Tenant Architecture
-- **Tenant-based data separation** across all modules
+### Single-Firm Architecture with Multi-Entity Support
+- **Single firm application** supporting multiple legal entities and offices
+- **Business Entity structure** for different legal entities within the firm (`BusinessEntity` table)
+- **Office management** for multiple physical locations (`Office` table linked to `BusinessEntity`)
 - **Soft delete pattern** throughout (`is_deleted = false`)
 - **Audit trail maintenance** with `inserted_at`, `updated_at` tracking
 - **User-based security** with role-based access control
@@ -114,7 +116,7 @@ Trust Transactions → Matter Fund Tracking
 
 ### ⚠️ **Universal Data Patterns**
 - **Soft Deletes**: Always filter `WHERE is_deleted = false`
-- **Tenant Separation**: Multi-tenant data isolation throughout
+- **Entity/Office Structure**: Single-firm application with multiple business entities and offices
 - **Audit Trails**: Complete user and timestamp tracking
 - **Enum Storage**: All enums as integers requiring CASE statements
 

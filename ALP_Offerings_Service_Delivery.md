@@ -217,6 +217,11 @@ The `offering_outcome_components` table creates flexible many-to-many relationsh
 - Components can be reused across different offerings
 - Allows for complex service delivery models
 
+**Operational Significance**: This bridge table architecture enables sophisticated template management:
+- **Move operations**: Components can relocate between outcomes without disrupting matter data
+- **Analytics tracking**: Matter components maintain links to bridge entries, not direct components
+- **Template evolution**: Structural changes in offerings don't require matter updates
+
 ---
 
 ## Template-to-Reality: Matter Implementation
@@ -248,6 +253,30 @@ time_entries.matter_component_id → matter_components.id
 2. **Matter Customization**: Components can be modified for specific clients
 3. **Template Evolution**: Offerings can be improved based on matter performance
 4. **Analytics Integrity**: Historical analysis remains valid
+
+### ⚙️ **Operational Data Integrity Principles**
+
+When offering templates are modified after matters have been created, the system maintains data integrity through specific operational rules:
+
+#### **🔄 Move Operations (Structural Reorganization)**
+- **Move Component**: Component moves between outcomes → **No matter updates needed**
+- **Move Outcome**: Outcome moves between offerings → **No matter updates needed**
+- **Principle**: Same template IDs maintained, analytics automatically follow new structure
+
+#### **🔀 Merge Operations (Template Consolidation)**
+- **Merge Component**: Components consolidated → **Connector fields updated only**
+- **Merge Outcome**: Outcomes consolidated → **Connector fields updated only**  
+- **Principle**: Links updated to surviving entities, all matter content preserved
+
+#### **🔗 Connector Field Strategy**
+The system distinguishes between:
+- **Connector Fields**: `offering_outcome_id`, `offering_outcome_component_id` (updated for analytics)
+- **Content Fields**: `description`, `estimated_units`, `budget` (always preserved)
+
+#### **🚨 Critical Implementation Note**
+- **Merge operations**: ✅ Correctly implemented (connectors updated, content preserved)
+- **Move operations**: ⚠️ Move outcome has critical bug (corrupts connector field)
+- **Best Practice**: Template changes maintain matter historical integrity while preserving analytics connectivity
 
 ---
 
@@ -397,6 +426,8 @@ ORDER BY matter_usage_count DESC;
 - **File**: [ALP_Matter_Management.md](./ALP_Matter_Management.md)
 - **Relationship**: Matters instantiate offering templates
 - **Key Logic**: Copy-on-create pattern for outcomes and components
+- **Data Integrity**: Template operations maintain matter historical integrity through connector field strategy
+- **Critical Note**: Move operations require no matter updates; merge operations update links only
 
 ### 🔗 **Time Tracking Integration**
 - **File**: [ALP_Time_Tracking.md](./ALP_Time_Tracking.md)  
@@ -451,7 +482,7 @@ END
 1. **Sample Size**: Ensure sufficient matter count for statistical validity
 2. **Time Period Bias**: Service delivery efficiency may vary by period
 3. **Client Complexity**: Some clients require more/less work for same outcome
-4. **Template Versioning**: Historical analysis complicated by template changes
+4. **Template Versioning**: Historical analysis complicated by template structural changes - however, operational integrity ensures matter data preserves original state while maintaining analytics connectivity through connector fields
 
 ### ⚠️ **Performance Implications**
 
